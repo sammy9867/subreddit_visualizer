@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  django:
+    build: . 
+    container_name: subreddit_visualizer_django
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes: 
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    depends_on: 
+      - redis
+
+  celery:
+    build: .
+    container_name: subreddit_visualizer_celery
+    command: celery -A subreddit_visualizer worker -B -l INFO
+    volumes: 
+      - .:/usr/src/app
+    env_file:
+      - ./.env
+    depends_on: 
+      - django
+      - redis
+
+  redis:
+    image: "redis:alpine"
+    container_name: redis
