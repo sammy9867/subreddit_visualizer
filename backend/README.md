@@ -24,6 +24,7 @@ CELERY_BACKEND=redis://redis:6379/0
 
 * We are extracting data from Reddit API using praw. In order to get the client id and secret, you need to sign up [here](https://www.reddit.com/prefs/apps) and create an app.
 
+### Installing 
 * We use Docker to build and run the application. After your docker is up and running, execute the following commands to build and run the backend:
 
 ```
@@ -32,6 +33,12 @@ $ docker-compose up --build
 * In another terminal, run the following data to migrate Django Models to the database after django service is running:
 ```
 $ docker exec -it subreddit_visualizer_django python manage.py migrate
+```
+
+### Dummy Data
+* To fill your database with some initial dummy data, run the following command:
+```
+$ docker exec -it subreddit_visualizer_django python manage.py get_subreddits <submission-count> <comment-count>
 ```
 
 ## Usage

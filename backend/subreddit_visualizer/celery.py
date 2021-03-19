@@ -17,7 +17,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'praw-every-monday-morning': {
         "task": "score.tasks.get_subreddits_every_monday",
-        "schedule": crontab(minute=32)#crontab(hour=0, minute=5, day_of_week=1)
+        "schedule": crontab(hour=0, minute=5, day_of_week=1)
     }
 }
 
