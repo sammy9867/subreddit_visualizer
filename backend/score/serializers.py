@@ -14,3 +14,4 @@ class WeeklyRedditorScoreSerializer(serializers.ModelSerializer):
             'week_number', 
             'created_utc'
         )
+        
