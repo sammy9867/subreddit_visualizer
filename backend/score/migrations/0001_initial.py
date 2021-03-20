@@ -9,21 +9,47 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('collector', '0001_initial'),
+        ("collector", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='WeeklyRedditorScore',
+            name="WeeklyRedditorScore",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('score_type', models.CharField(choices=[('SUB', 'Submission'), ('COM', 'Comment')], max_length=3)),
-                ('score', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('rank', models.PositiveIntegerField()),
-                ('week_number', models.PositiveIntegerField()),
-                ('created_utc', models.DateTimeField()),
-                ('redditor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='collector.redditor')),
-                ('subreddit', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='collector.subreddit')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "score_type",
+                    models.CharField(
+                        choices=[("SUB", "Submission"), ("COM", "Comment")],
+                        max_length=3,
+                    ),
+                ),
+                ("score", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("rank", models.PositiveIntegerField()),
+                ("week_number", models.PositiveIntegerField()),
+                ("created_utc", models.DateTimeField()),
+                (
+                    "redditor",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="collector.redditor",
+                    ),
+                ),
+                (
+                    "subreddit",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="collector.subreddit",
+                    ),
+                ),
             ],
         ),
     ]

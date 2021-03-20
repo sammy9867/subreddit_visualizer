@@ -20,7 +20,7 @@ from rest_framework import routers
 from django.conf.urls import url
 
 router = routers.DefaultRouter()
-router.register(r'subreddits', SubredditViewSet, basename='subreddits')
-router.register(r'weekly_scores', WeeklyRedditorScoreViewSet, basename='weekly_scores')
+router.register(r"subreddits", SubredditViewSet, basename="subreddits")
+router.register(r"weekly_scores", WeeklyRedditorScoreViewSet, basename="weekly_scores")
 
 urlpatterns = router.urls

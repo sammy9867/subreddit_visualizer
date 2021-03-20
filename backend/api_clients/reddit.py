@@ -2,23 +2,23 @@ import os
 from datetime import datetime, timedelta
 
 import praw
-from dotenv import load_dotenv, find_dotenv
 
+from django.conf import settings
 from django.utils import timezone
 from collector.models import Subreddit, Submission, Comment, Redditor
 
-# Loading .env file
-load_dotenv(find_dotenv())
 
-class SubredditCollector:
+class RedditAPIClient:
     def __init__(self):
         self.reddit = praw.Reddit(
-            client_id=os.environ.get('REDDIT_CLIENT_ID'),
-            client_secret=os.environ.get('REDDIT_CLIENT_SECRET'),
-            user_agent=os.environ.get('REDDIT_USER_AGENT')
+            client_id=settings.REDDIT_CLIENT_ID,
+            client_secret=settings.REDDIT_CLIENT_SECRET,
+            user_agent=settings.REDDIT_USER_AGENT,
         )
 
-    def get_subreddits(self, subreddits, submission_limit, comment_limit, start_day, end_day):
+    def get_subreddits(
+        self, subreddits, submission_limit, comment_limit, start_day, end_day
+    ):
         for subreddit in subreddits:
             num_submissions = submission_limit
             validated_subreddit = self.reddit.subreddit(subreddit)
@@ -35,23 +35,25 @@ class SubredditCollector:
                     for comment in submission.comments.list():
                         if comment is None or num_comments <= 0:
                             break
-                        if self.is_comment_saved(comment, submission.id, start_day, end_day):
+                        if self.is_comment_saved(
+                            comment, submission.id, start_day, end_day
+                        ):
                             num_comments -= 1
-            
+
     def save_subreddit(self, subreddit):
         try:
             subreddit_saved = Subreddit.objects.get(pk=subreddit.id)
         except Subreddit.DoesNotExist:
             print("Subreddit", subreddit.display_name)
             subreddit_saved = Subreddit(
-                id=subreddit.id, 
-                display_name=subreddit.display_name, 
-                title=subreddit.title
+                id=subreddit.id,
+                display_name=subreddit.display_name,
+                title=subreddit.title,
             )
             subreddit_saved.save()
 
     def is_redditor_saved(self, redditor):
-        if redditor is None or not hasattr(redditor, 'id'):
+        if redditor is None or not hasattr(redditor, "id"):
             return False
         try:
             redditor_saved = Redditor.objects.get(pk=redditor.id)
@@ -77,7 +79,7 @@ class SubredditCollector:
                 karma=submission.score,
                 upvote_ratio=submission.upvote_ratio,
                 num_comments=submission.num_comments,
-                created_utc=created_utc
+                created_utc=created_utc,
             )
             submission_saved.save()
         return True
@@ -96,7 +98,7 @@ class SubredditCollector:
                 subreddit_id=comment.subreddit.id,
                 submission_id=submission_id,
                 karma=comment.score,
-                created_utc=created_utc
+                created_utc=created_utc,
             )
             comment_saved.save()
         return True

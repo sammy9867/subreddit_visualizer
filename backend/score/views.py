@@ -9,20 +9,20 @@ from score.serializers import WeeklyRedditorScoreSerializer
 # http://localhost:8000/weekly_scores/?score_type=com&week_number=7&year=2021&subreddit_id=2s3qj
 class WeeklyRedditorScoreViewSet(ListModelMixin, viewsets.GenericViewSet):
     serializer_class = WeeklyRedditorScoreSerializer
-    
+
     def get_queryset(self):
-        score_type = self.request.query_params.get('score_type', None)
-        week_number = self.request.query_params.get('week_number', None)
-        year = self.request.query_params.get('year', None)
+        score_type = self.request.query_params.get("score_type", None)
+        week_number = self.request.query_params.get("week_number", None)
+        year = self.request.query_params.get("year", None)
         if week_number is None or year is None or score_type is None:
             return Response(
-                {"error": "score_type, week_number and year required"}, 
-                status=HTTP_400_BAD_REQUEST
+                {"error": "score_type, week_number and year required"},
+                status=HTTP_400_BAD_REQUEST,
             )
         queryset = WeeklyRedditorScore.objects.filter(
-            score_type=score_type.upper(), 
-            week_number=week_number, 
-            created_utc__year=year
+            score_type=score_type.upper(),
+            week_number=week_number,
+            created_utc__year=year,
         )
         subreddit_id = self.request.query_params.get("subreddit_id", None)
         if subreddit_id != None:

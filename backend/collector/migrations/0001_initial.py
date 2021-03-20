@@ -8,46 +8,87 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Redditor',
+            name="Redditor",
             fields=[
-                ('id', models.CharField(max_length=20, primary_key=True, serialize=False)),
-                ('name', models.CharField(default='', max_length=50)),
+                (
+                    "id",
+                    models.CharField(max_length=20, primary_key=True, serialize=False),
+                ),
+                ("name", models.CharField(default="", max_length=50)),
             ],
         ),
         migrations.CreateModel(
-            name='Subreddit',
+            name="Subreddit",
             fields=[
-                ('id', models.CharField(max_length=20, primary_key=True, serialize=False)),
-                ('display_name', models.CharField(default='', max_length=30)),
-                ('title', models.CharField(default='', max_length=100)),
+                (
+                    "id",
+                    models.CharField(max_length=20, primary_key=True, serialize=False),
+                ),
+                ("display_name", models.CharField(default="", max_length=30)),
+                ("title", models.CharField(default="", max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='Submission',
+            name="Submission",
             fields=[
-                ('id', models.CharField(max_length=20, primary_key=True, serialize=False)),
-                ('karma', models.IntegerField()),
-                ('upvote_ratio', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('num_comments', models.IntegerField()),
-                ('created_utc', models.DateTimeField()),
-                ('redditor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='collector.redditor')),
-                ('subreddit', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='collector.subreddit')),
+                (
+                    "id",
+                    models.CharField(max_length=20, primary_key=True, serialize=False),
+                ),
+                ("karma", models.IntegerField()),
+                ("upvote_ratio", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("num_comments", models.IntegerField()),
+                ("created_utc", models.DateTimeField()),
+                (
+                    "redditor",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="collector.redditor",
+                    ),
+                ),
+                (
+                    "subreddit",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="collector.subreddit",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.CharField(max_length=20, primary_key=True, serialize=False)),
-                ('karma', models.IntegerField()),
-                ('created_utc', models.DateTimeField()),
-                ('redditor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='collector.redditor')),
-                ('submission', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='collector.submission')),
-                ('subreddit', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='collector.subreddit')),
+                (
+                    "id",
+                    models.CharField(max_length=20, primary_key=True, serialize=False),
+                ),
+                ("karma", models.IntegerField()),
+                ("created_utc", models.DateTimeField()),
+                (
+                    "redditor",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="collector.redditor",
+                    ),
+                ),
+                (
+                    "submission",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="collector.submission",
+                    ),
+                ),
+                (
+                    "subreddit",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="collector.subreddit",
+                    ),
+                ),
             ],
         ),
     ]

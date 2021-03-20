@@ -3,12 +3,20 @@ from django.db import models
 # Add description for Submissions and Comments in the 2nd phase
 class Subreddit(models.Model):
     id = models.CharField(primary_key=True, max_length=20)
-    display_name = models.CharField(max_length=30, blank=False, default='')
-    title =  models.CharField(max_length=100, blank=False, default='')
+    display_name = models.CharField(max_length=30, blank=False, default="")
+    title = models.CharField(max_length=100, blank=False, default="")
+
+    def __str__(self):
+        return self.display_name
+
 
 class Redditor(models.Model):
     id = models.CharField(primary_key=True, max_length=20)
-    name = models.CharField(max_length=50, blank=False, default='')
+    name = models.CharField(max_length=50, blank=False, default="")
+
+    def __str__(self):
+        return self.name
+
 
 class Submission(models.Model):
     id = models.CharField(primary_key=True, max_length=20)
@@ -19,6 +27,10 @@ class Submission(models.Model):
     num_comments = models.IntegerField()
     created_utc = models.DateTimeField()
 
+    def __str__(self):
+        return self.id
+
+
 class Comment(models.Model):
     id = models.CharField(primary_key=True, max_length=20)
     subreddit = models.ForeignKey(Subreddit, on_delete=models.CASCADE)
@@ -26,3 +38,6 @@ class Comment(models.Model):
     submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
     karma = models.IntegerField()
     created_utc = models.DateTimeField()
+
+    def __str__(self):
+        return self.id
