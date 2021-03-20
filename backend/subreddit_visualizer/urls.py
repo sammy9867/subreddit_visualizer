@@ -14,13 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import include, path
-from collector.views import SubredditViewSet
-from score.views import WeeklyRedditorScoreViewSet
-from rest_framework import routers
-from django.conf.urls import url
+from collector.urls import router as collector_router
+from score.urls import router as score_router
 
-router = routers.DefaultRouter()
-router.register(r"subreddits", SubredditViewSet, basename="subreddits")
-router.register(r"weekly_scores", WeeklyRedditorScoreViewSet, basename="weekly_scores")
-
-urlpatterns = router.urls
+urlpatterns = [
+    path('api/v1/', include([
+        path('',  include(collector_router.urls)),
+        path('',  include(score_router.urls)),
+    ])),
+]

@@ -5,8 +5,8 @@ from rest_framework.mixins import ListModelMixin
 from score.models import WeeklyRedditorScore
 from score.serializers import WeeklyRedditorScoreSerializer
 
-# http://localhost:8000/weekly_scores/?score_type=sub&week_number=7&year=2021
-# http://localhost:8000/weekly_scores/?score_type=com&week_number=7&year=2021&subreddit_id=2s3qj
+# http://localhost:8000/api/v1/weekly_scores/?score_type=sub&week_number=10&year=2021
+# http://localhost:8000/api/v1/weekly_scores/?score_type=com&week_number=10&year=2021&subreddit_id=2s3qj
 class WeeklyRedditorScoreViewSet(ListModelMixin, viewsets.GenericViewSet):
     serializer_class = WeeklyRedditorScoreSerializer
 
