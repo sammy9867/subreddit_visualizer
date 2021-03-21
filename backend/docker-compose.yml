@@ -3,7 +3,7 @@ version: "3.8"
 services:
   django:
     build: . 
-    container_name: subreddit_visualizer_django
+    container_name: visualizer_django
     command: python manage.py runserver 0.0.0.0:8000
     volumes: 
       - .:/usr/src/app
@@ -16,8 +16,8 @@ services:
 
   celery:
     build: .
-    container_name: subreddit_visualizer_celery
-    command: celery -A subreddit_visualizer worker -B -l INFO
+    container_name: visualizer_celery
+    command: celery -A visualizer worker -B -l INFO
     volumes: 
       - .:/usr/src/app
     env_file:

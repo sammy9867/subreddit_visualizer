@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.mixins import ListModelMixin
 
-from collector.models import Subreddit
-from collector.serializers import SubredditSerializer
+from .models import Subreddit
+from .serializers import SubredditSerializer
 
 
 class SubredditViewSet(ListModelMixin, viewsets.GenericViewSet):

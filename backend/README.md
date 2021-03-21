@@ -32,13 +32,13 @@ $ docker-compose up --build
 ```
 * In another terminal, run the following data to migrate Django Models to the database after django service is running:
 ```
-$ docker exec -it subreddit_visualizer_django python manage.py migrate
+$ docker exec -it visualizer_django python manage.py migrate
 ```
 
 ### Dummy Data
 * To fill your database with some initial dummy data, run the following command:
 ```
-$ docker exec -it subreddit_visualizer_django python manage.py get_subreddits <submission-count> <comment-count>
+$ docker exec -it visualizer_django python manage.py get_subreddits <submission-count> <comment-count>
 ```
 
 ## Usage

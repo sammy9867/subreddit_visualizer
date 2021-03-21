@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from collector.models import Subreddit
+from .models import Subreddit
 
 
 class SubredditSerializer(serializers.ModelSerializer):

@@ -5,7 +5,7 @@ import praw
 
 from django.conf import settings
 from django.utils import timezone
-from collector.models import Subreddit, Submission, Comment, Redditor
+from reddit.models import Subreddit, Submission, Comment, Redditor
 
 
 class RedditAPIClient:

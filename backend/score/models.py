@@ -1,5 +1,5 @@
 from django.db import models
-from collector.models import Subreddit, Redditor
+from reddit.models import Subreddit, Redditor
 
 # Top 5 submitters and commenters per week
 class WeeklyRedditorScore(models.Model):

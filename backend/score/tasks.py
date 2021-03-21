@@ -8,9 +8,9 @@ from celery import shared_task
 from django.utils import timezone
 from django.conf import settings
 
-from score.models import WeeklyRedditorScore
-from collector.models import Submission, Comment, Subreddit
-from api_clients.reddit import RedditAPIClient
+from .models import WeeklyRedditorScore
+from reddit.models import Submission, Comment, Subreddit
+from api_clients.reddit_client import RedditAPIClient
 
 
 @shared_task

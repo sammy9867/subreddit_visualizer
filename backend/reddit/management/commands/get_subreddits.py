@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from api_clients.reddit import RedditAPIClient
+from api_clients.reddit_client import RedditAPIClient
 from score.tasks import compute_score
 
 from django.utils import timezone

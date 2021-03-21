@@ -6,7 +6,6 @@ class WeeklyRedditorScoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = WeeklyRedditorScore
         fields = (
-            "id",
             "subreddit_id",
             "redditor_id",
             "score_type",
