@@ -43,5 +43,5 @@ $ docker exec -it visualizer_django python manage.py get_subreddits <submission-
 
 ## Usage
 * List of all subreddits: http://localhost:8000/api/v1/subreddits/
-* List of top weekly submissions of all subreddits: http://localhost:8000/api/v1/weekly_scores/?score_type=sub&week_number=11&year=2021
-* List of top weekly comments by subreddit: http://localhost:8000/api/v1/weekly_scores/?score_type=com&week_number=11&year=2021&subreddit_id=2s3qj
+* List of top weekly submissions of all subreddits: http://localhost:8000/api/v1/weekly-scores/?score_type=sub&week_number=11&year=2021
+* List of top weekly comments by subreddit: http://localhost:8000/api/v1/weekly-scores/?score_type=com&week_number=11&year=2021&subreddit_id=2s3qj

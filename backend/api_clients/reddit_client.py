@@ -21,7 +21,7 @@ class RedditAPIClient:
     ):
         for subreddit in subreddits:
             num_submissions = submission_limit
-            validated_subreddit = self.reddit.subreddit(subreddit)
+            validated_subreddit = self.validate_subreddit(subreddit)
             if validated_subreddit is None:
                 continue
             self.save_subreddit(validated_subreddit)
@@ -39,6 +39,9 @@ class RedditAPIClient:
                             comment, submission.id, start_day, end_day
                         ):
                             num_comments -= 1
+
+    def validate_subreddit(self, subreddit):
+        return self.reddit.subreddit(subreddit)
 
     def save_subreddit(self, subreddit):
         try:
