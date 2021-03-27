@@ -32,7 +32,7 @@ class RedditAPIClientTest(TestCase):
         self.assertEqual(Subreddit.objects.count(), 1)
         self.assertEqual(Submission.objects.count(), 1)
         self.assertEqual(Comment.objects.count(), 1)
-        self.assertNotEqual(Redditor.objects.count(), 0)
+        self.assertGreater(Redditor.objects.count(), 0)
 
     def test_validate_subreddit(self):
         subreddit = self.reddit_client.validate_subreddit("news")
