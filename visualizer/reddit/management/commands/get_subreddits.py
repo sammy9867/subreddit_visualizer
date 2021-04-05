@@ -1,9 +1,10 @@
 from django.core.management.base import BaseCommand, CommandError
 from api_clients.reddit_client import RedditAPIClient
-from score.tasks import compute_score
+from reddit.tasks import compute_score
 
 from django.utils import timezone
-from datetime import datetime, timedelta
+from datetime import timedelta
+from django.conf import settings
 
 
 class Command(BaseCommand):
@@ -16,10 +17,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         submission_limit = options["submission_limit"]
         comment_limit = options["comment_limit"]
-        end_day = datetime.now(tz=timezone.utc)
+        end_day = timezone.now()
         start_day = end_day - timedelta(days=7)
-        subreddits = ["Bitcoin", "wallstreetbets", "fitness"]
         reddit_client = RedditAPIClient()
+        subreddits = settings.SUBREDDIT_LIST
         reddit_client.get_subreddits(
             subreddits,
             submission_limit,

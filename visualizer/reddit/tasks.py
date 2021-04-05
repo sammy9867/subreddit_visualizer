@@ -1,15 +1,14 @@
 from __future__ import absolute_import, unicode_literals
 
 import os
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from celery import shared_task
 
 from django.utils import timezone
 from django.conf import settings
 
-from .models import WeeklyRedditorScore
-from reddit.models import Submission, Comment, Subreddit
+from .models import Submission, Comment, Subreddit, WeeklyRedditorScore
 from api_clients.reddit_client import RedditAPIClient
 
 
@@ -17,17 +16,9 @@ from api_clients.reddit_client import RedditAPIClient
 def get_subreddits_every_monday_task():
     submission_limit = settings.SUBMISSION_LIMIT
     comment_limit = settings.COMMENT_LIMIT
-    end_day = datetime.now(tz=timezone.utc)
+    end_day = timezone.now()
     start_day = end_day - timedelta(days=7)
-    subreddits = [
-        "Bitcoin",
-        "wallstreetbets",
-        "fitness",
-        "sports",
-        "politics",
-        "movies",
-        "news",
-    ]
+    subreddits = settings.SUBREDDIT_LIST
     reddit_client = RedditAPIClient()
     reddit_client.get_subreddits(
         subreddits,

@@ -87,4 +87,7 @@ class RedditAPIClientTest(TestCase):
         )
         self.assertEqual(Comment.objects.count(), 1)
 
-    # def test_unix_timestamp_to_datetime(self):
+    def test_unix_timestamp_to_datetime(self):
+        unix_timestamp = 1617231600  # Unix Timestamp for 1st April, 2021
+        result = self.reddit_client.unix_timestamp_to_datetime(unix_timestamp)
+        self.assertEqual(result, datetime(2021, 4, 1, tzinfo=timezone.utc))

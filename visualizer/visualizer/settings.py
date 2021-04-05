@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_celery_beat",
     "reddit.apps.RedditConfig",
-    "score.apps.ScoreConfig",
 ]
 
 MIDDLEWARE = [
@@ -119,7 +118,13 @@ COMMENT_LIMIT = os.environ.get("COMMENT_LIMIT", 2)
 REDDIT_CLIENT_ID = os.environ.get("REDDIT_CLIENT_ID", None)
 REDDIT_CLIENT_SECRET = os.environ.get("REDDIT_CLIENT_SECRET", None)
 REDDIT_USER_AGENT = os.environ.get("REDDIT_USER_AGENT", None)
-
+SUBREDDIT_LIST = [
+    "CryptoCurrency",
+    "movies",
+    "music",
+    "sports",
+    "wallstreetbets",
+]
 
 # Celery Config
 
@@ -127,3 +132,4 @@ CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
